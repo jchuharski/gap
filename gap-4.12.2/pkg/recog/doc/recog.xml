@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is an automatically generated file. -->
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+[
+    [<#Include SYSTEM "_entities.xml">
+]
+>
+<Book Name="recog">
+<#Include SYSTEM "title.xml">
+<TableOfContents/>
+<Body>
+<#Include SYSTEM "intro.xml">
+<#Include SYSTEM "install.xml">
+<#Include SYSTEM "recognition.xml">
+<#Include SYSTEM "methsel.xml">
+<#Include SYSTEM "afterrecog.xml">
+<#Include SYSTEM "methods.xml">
+<#Include SYSTEM "examples.xml">
+<#Include SYSTEM "renaming.xml">
+<#Include SYSTEM "_AutoDocMainFile.xml">
+</Body>
+<Bibliography Databases="recog"/>
+<TheIndex/>
+</Book>

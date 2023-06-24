@@ -1,0 +1,127 @@
+<!--
+
+   This chapter covers our own method selection.
+
+-->
+
+<Chapter Label="methsel">
+<Heading>Method selection</Heading>
+
+The setup described in this chapter is intended for situations, in which
+lots of different methods are available to fulfill a certain task, but
+in which it is not possible in the beginning to decide, which one to use.
+Therefore this setup regulates, rather than just which method to choose,
+in which order the various methods are tried. The methods themselves
+return whether they were successful and, if not, whether it is sensible
+to try them again at a later stage.<P/>
+
+The design is intentionally kept as simple as possible and at the same
+time as versatile as possible, thereby providing a useful framework
+for many situations as described above.<P/>
+
+Note the differences to the &GAP; method selection, which is designed
+with the idea in mind that it will be quite clear in most
+situations, which one is <Q>the best</Q> method for a given set of
+input data, and that we do not want to try different things. On the other
+hand, the &GAP; method selection is quite complicated, which is to some
+extend necessary to make sure, that lots of different information about
+the objects in question can be used to really find the best method.<P/>
+
+Our setup here in particular has to fulfill the requirement, that in the
+end, with lots of methods installed, one still has to be able to have
+an overview and to <Q>prove</Q>, that the whole system always does
+the right thing.<P/>
+
+<Section Label="whataremethods">
+    <Heading>What are methods?</Heading>
+
+Recognition methods lie in the filter <Ref Filt="IsRecogMethod"/> and can be
+created via the function <Ref Func="RecogMethod"/>.
+
+<#Include Label="IsRecogMethod">
+
+<#Include Label="RecogMethod">
+
+<#Include Label="BindRecogMethod">
+
+<#Include Label="Stamp">
+<#Include Label="Comment">
+
+<#Include Label="CallRecogMethod">
+
+</Section>
+
+<Section Label="methoddatabases">
+<Heading>Method Databases</Heading>
+
+A <E>method database</E> is a list of records, where each record has the
+following components:
+<List>
+<Mark><C>method</C></Mark>
+<Item>
+    A recognition method created with <Ref Func="RecogMethod"/>.
+</Item>
+<Mark><C>rank</C></Mark>
+<Item>
+    An integer used to sort the various methods. Higher numbers mean that the
+    method is tried earlier.
+    See <Ref Func="CallMethods"/> for information on how the methods are called.
+</Item>
+</List>
+
+The databases are always sorted such that the ranks are decreasing.
+Use <Ref Func="AddMethod"/> to add a method to a database according to its rank.
+
+<#Include Label="AddMethod">
+<P/>
+
+The following databases contain the methods for finding
+homomorphisms for permutation, matrix, and projective groups.
+
+<#Include Label="FindHomDbPerm">
+<#Include Label="FindHomDbMatrix">
+<#Include Label="FindHomDbProjective">
+<P/>
+
+</Section>
+
+<Section Label="howcalled">
+    <Heading>How methods are called</Heading>
+
+Whenever the method selection shall be used, one calls the following
+function:
+
+<#Include Label="CallMethods">
+</Section>
+
+<Section Label="howstored">
+<Heading>Global records storing functions</Heading>
+
+The following global records store the methods for finding
+homomorphisms for group recognition.
+We collect them in these records such that we do not use up too many
+global variable names.
+
+<#Include Label="FindHomMethodsPerm">
+<#Include Label="FindHomMethodsMatrix">
+<#Include Label="FindHomMethodsProjective">
+<#Include Label="FindHomMethodsGeneric">
+
+The following global records hold the functions for writing group elements as
+straight line programs (SLPs) in terms of the generators after successful group
+recognition.
+We collect them in these records such that we do not use up too many global
+variable names.
+
+<#Include Label="SLPforElementFuncsPerm">
+<#Include Label="SLPforElementFuncsMatrix">
+<#Include Label="SLPforElementFuncsProjective">
+<#Include Label="SLPforElementFuncsGeneric">
+
+</Section>
+
+<P/>
+
+<!-- ############################################################ -->
+
+</Chapter>

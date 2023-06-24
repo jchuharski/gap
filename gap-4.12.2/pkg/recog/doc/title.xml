@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is an automatically generated file. -->
+<TitlePage>
+  <Title>
+    recog
+  </Title>
+  <Subtitle>
+    A package for constructive recognition of permutation and matrix groups
+  </Subtitle>
+  <Version>
+    1.4.2
+  </Version>
+  <Author>
+    Max Neunhöffer<Alt Only="LaTeX"><Br/></Alt>
+<Email>max@9hoeffer.de</Email>
+
+  </Author>
+  <Author>
+    Ákos Seress<Alt Only="LaTeX"><Br/></Alt>
+
+  </Author>
+  <Date>
+    27 September 2022
+  </Date>
+  <Copyright>
+    &copyright; 2005-2014 by Max Neunhöffer and Ákos Seress<P/>
+&copyright; 2005-2022 by its authors, see file <F>COPYRIGHT</F> for details.<P/>
+
+This package may be distributed under the terms and conditions of the
+GNU Public License Version 3 or (at your option) any later version.
+  </Copyright>
+  </TitlePage>

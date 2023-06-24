@@ -1,0 +1,32 @@
+# makefile prototype for the EDIM package (assuming GAP >= 4.9) Frank Lübeck
+
+GAPPATH=@GAPPATH@
+
+GAP=@GAP@
+
+GAC=@GAC@
+
+.PHONY: doc clean distclean docclean test
+
+bin/@GAPARCH@/ediv.so: src/ediv.c Makefile
+	@mkdir -p bin/@GAPARCH@
+	$(GAC) -d -o bin/@GAPARCH@/ediv.so src/ediv.c
+
+doc:
+	$(GAP)  makedocrel.g
+
+clean: 
+	rm -rf bin/@GAPARCH@ Makefile *~
+
+distclean:
+	rm -rf bin Makefile Makefile-*
+
+docclean:
+	(cd  doc; ./clean)
+
+test:
+	$(GAP) -b -q -r < tst/test.g
+
+# regenerate Makefile if any of its inputs changed
+Makefile: configure Makefile.in $(GAPPATH)/sysinfo.gap
+	./configure @GAPPATH@

@@ -1,0 +1,1 @@
+ -I./build -I./src -DUSE_GASMAN=1 -I/opt/homebrew/include  -I/opt/homebrew/opt/readline/include   

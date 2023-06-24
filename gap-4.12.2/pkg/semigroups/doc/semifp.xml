@@ -1,0 +1,161 @@
+#############################################################################
+##
+#W  semifp.xml
+#Y  Copyright (C) 2020-2022                                   Luke Elliott
+##
+##  Licensing information can be found in the README file of this package.
+##
+#############################################################################
+##
+
+<#GAPDoc Label="ParseRelations">
+<ManSection>
+  <Oper Name="ParseRelations" Arg="gens, rels"/>
+  <Returns>A list of pairs of semigroup or monoid elements.</Returns>
+  <Description>
+    <C>ParseRelations</C> converts a string describing relations for a
+    semigroup or monoid to the list of pairs of semigroup or monoid elements it
+    represents. Any white space given is ignored. The output list is then
+    compatible with other &GAP; functions. In the below examples we see free
+    semigroups and monoids being directly quotiented by the output of the
+    <C>ParseRelations</C> function.
+    <P/>
+
+    The argument <A>gens</A> must be a list of generators for a free semigroup,
+    each being a single alphabet letter (in upper or lower case). The argument
+    <A>rels</A> must be string that lists the equalities desired.<P/>
+
+    To take a quotient of a free monoid, it is necessary to use 
+    <Ref Attr="GeneratorsOfMonoid" BookName="ref"/> as the 1st argument to
+    <C>ParseRelations</C> and the identity may appear as <C>1</C> in the
+    specified relations.
+
+    <Example><![CDATA[
+gap> f := FreeSemigroup("x", "y", "z");;
+gap> AssignGeneratorVariables(f);
+gap> ParseRelations([x, y, z], "  x=(y^2z) ^2x, y=xxx , z=y^3");
+[ [ x, (y^2*z)^2*x ], [ y, x^3 ], [ z, y^3 ] ]
+gap> r := ParseRelations([x, y, z], "  x=(y^2z)^2x, y=xxx=z , z=y^3");
+[ [ x, (y^2*z)^2*x ], [ y, x^3 ], [ x^3, z ], [ z, y^3 ] ]
+gap> f / r;
+<fp semigroup with 3 generators and 4 relations of length 23>
+gap> f2 := FreeSemigroup("a");
+<free semigroup on the generators [ a ]>
+gap> f2 / ParseRelations(GeneratorsOfSemigroup(f2), "a = a^2");
+<fp semigroup with 1 generator and 1 relation of length 4>
+gap> FreeMonoidAndAssignGeneratorVars("a", "b")
+> / ParseRelations([a, b], "a^2=1,b^3=1,(ab)^3=1");
+<fp monoid with 2 generators and 3 relations of length 13>
+]]></Example>
+  </Description>
+</ManSection>
+<#/GAPDoc>
+
+<#GAPDoc Label="ElementOfFpSemigroup">
+<ManSection>
+  <Oper Name="ElementOfFpSemigroup" Arg="S, word"/>
+  <Returns>An element of the fp semigroup <A>S</A>.</Returns>
+  <Description>
+    When <A>S</A> is a finitely presented semigroup and <A>word</A> is an
+    associative word in the associated free semigroup (see
+    <Ref Filt="IsAssocWord" BookName="ref"/>), this returns the
+    fp semigroup element with representative <A>word</A>.
+    <P/>
+
+    This function is just a short form of the &GAP; library implementation of
+    <Ref Oper="ElementOfFpSemigroup" BookName="ref"/> which does not require
+    retrieving an element family.
+
+    <Example><![CDATA[
+gap> f := FreeSemigroup("x", "y");;
+gap> AssignGeneratorVariables(f);
+gap> s := f / [[x * x, x], [y * y, y]];
+<fp semigroup with 2 generators and 2 relations of length 8>
+gap> a := ElementOfFpSemigroup(s, x * y);
+x*y
+gap> b := ElementOfFpSemigroup(s, x * y * y);
+x*y^2
+gap> a in s;
+true
+gap> a = b;
+true]]></Example>
+  </Description>
+</ManSection>
+<#/GAPDoc>
+
+<#GAPDoc Label="ElementOfFpMonoid">
+<ManSection>
+  <Oper Name="ElementOfFpMonoid" Arg="M, word"/>
+  <Returns>An element of the fp monoid <A>M</A>.</Returns>
+  <Description>
+    When <A>M</A> is a finitely presented monoid and <A>word</A> is an
+    associative word in the associated free monoid (see
+    <Ref Filt="IsAssocWord" BookName="ref"/>), this returns the
+    fp monoid element with representative <A>word</A>.
+    <P/>
+
+    This is analogous to <Ref Oper="ElementOfFpSemigroup"/>.
+  </Description>
+</ManSection>
+<#/GAPDoc>
+
+<#GAPDoc Label="FreeMonoidAndAssignGeneratorVars">
+<ManSection>
+  <Func Name="FreeMonoidAndAssignGeneratorVars" Arg="arg..."/>
+  <Func Name="FreeSemigroupAndAssignGeneratorVars" Arg="arg..."/>
+  <Returns>A free semigroup or monoid.</Returns>
+  <Description>
+    <C>FreeMonoidAndAssignGeneratorVars</C> is synonym with:
+    <Log>
+      FreeMonoid(arg...);
+      AssignGeneratorVariables(last);</Log>
+    These functions exist so that the <C>String</C> method for a finitely
+    presented semigroup or monoid to be valid &GAP; input which can be used to
+    reconstruct the semigroup or monoid.
+    <Example><![CDATA[
+gap> F := FreeSemigroupAndAssignGeneratorVars("x", "y");;
+gap> IsBound(x);
+true
+gap> IsBound(y);
+true]]></Example>
+  </Description>
+</ManSection>
+<#/GAPDoc>
+
+<#GAPDoc Label="AntiIsomorphismDualFpSemigroup">
+<ManSection>
+  <Attr Name="AntiIsomorphismDualFpSemigroup" Arg="S"/>
+  <Attr Name="AntiIsomorphismDualFpMonoid" Arg="S"/>
+  <Returns>A finitely presented semigroup or monoid.</Returns>
+  <Description>
+    <C>AntiIsomorphismDualFpSemigroup</C> returns an anti-isomorphism (<Ref
+    Func="MappingByFunction" BookName="ref"/>) from the
+    finitely presented semigroup <A>S</A> to another finitely presented
+    semigroup. The range finitely presented semigroup is obtained from <A>S</A>
+    by reversing the relations of <A>S</A>.<P/>
+
+    <C>AntiIsomorphismDualFpMonoid</C> works analogously when <A>S</A> is a
+    finitely presented monoid, and the range of the returned anti-isomorphism
+    is a finitely presented monoid. 
+
+    <Example><![CDATA[
+gap> F := FreeSemigroup("a", "b");
+<free semigroup on the generators [ a, b ]>
+gap> AssignGeneratorVariables(F);
+gap> R := [[a ^ 3, a], [b ^ 2, b], [(a * b) ^ 2, a]];
+[ [ a^3, a ], [ b^2, b ], [ (a*b)^2, a ] ]
+gap> S := F / R;
+<fp semigroup with 2 generators and 3 relations of length 14>
+gap> map := AntiIsomorphismDualFpSemigroup(S);
+MappingByFunction( <fp semigroup with 2 generators and 
+  3 relations of length 14>, <fp semigroup with 2 generators and 
+  3 relations of length 14>
+ , function( x ) ... end, function( x ) ... end )
+gap> RelationsOfFpSemigroup(Range(map));
+[ [ a^3, a ], [ b^2, b ], [ (b*a)^2, a ] ]
+]]></Example>
+  </Description>
+</ManSection>
+<#/GAPDoc>
+
+

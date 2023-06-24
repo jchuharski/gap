@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is an automatically generated file. -->
+<Chapter Label="Chapter_The_main_functions">
+<Heading>The main functions</Heading>
+
+<Section Label="Chapter_The_main_functions_Section_Zassenhaus_Conjecture">
+<Heading>Zassenhaus Conjecture</Heading>
+
+This function checks whether the Zassenhaus Conjecture ((ZC) for short, cf. Section
+<Ref Sect='Chapter_Background_Section_The_Zassenhaus_Conjecture_and_the_Prime_Graph_Question'/>) can be proved
+using the HeLP method with the data available in GAP.
+<ManSection>
+  <Func Arg="OrdinaryCharacterTable|Group" Name="HeLP_ZC" />
+ <Returns><K>true</K> if (ZC) can be solved using the given data, <K>false</K> otherwise
+</Returns>
+ <Description>
+<K>HeLP_ZC</K> checks whether the Zassenhaus Conjecture can be solved for
+the given group using the HeLP method, the Wagner test and all character data available.
+The argument of the function can be either an ordinary character table
+or a group. In the second case it will first calculate the corresponding
+ordinary character table.
+If the group in question is nilpotent, the Zassenhaus Conjecture holds by a result of A. Weiss and the
+function will return <K>true</K> without performing any calculations.<P/>
+If the group is not solvable, the function will check all orders
+which are divisors of the exponent of the group. If the group is solvable, it will only check the orders
+of group elements, as there can't be any torsion units of another order.
+The function will use the ordinary table
+and, for the primes <Math>p</Math> for which the group is not <Math>p</Math>-solvable, all <Math>p</Math>-Brauer tables which are available in GAP
+to produce as many constraints on the torsion units as possible. Additionally, the Wagner test
+is applied to the results, cf. Section <Ref Sect='Chapter_Background_Section_The_Wagner_test'/>.
+In case the information
+suffices to obtain a proof for the Zassenhaus Conjecture for this group
+the function will return <K>true</K> and <K>false</K> otherwise.
+The possible partial augmentations for elements of order <M>k</M>
+and all its powers will also be stored in the list entry <K>HeLP_sol[k]</K>.<P/>
+The prior computed partial augmentations in <K>HeLP_sol</K> will not be used and will be overwritten.
+If you do not like the last fact, please use <Ref Func='HeLP_AllOrders'/>.
+ </Description>
+</ManSection>
+
+
+
+</Section>
+
+
+<Section Label="Chapter_The_main_functions_Section_Prime_Graph_Question">
+<Heading>Prime Graph Question</Heading>
+
+This function checks whether the Prime Graph Question ((PQ) for short, cf. Section
+<Ref Sect='Chapter_Background_Section_The_Zassenhaus_Conjecture_and_the_Prime_Graph_Question'/>) can be verified
+using the HeLP method with the data available in GAP.
+<ManSection>
+  <Func Arg="OrdinaryCharacterTable|Group" Name="HeLP_PQ" />
+ <Returns><K>true</K> if (PQ) can be solved using the given data, <K>false</K> otherwise
+</Returns>
+ <Description>
+<K>HeLP_PQ</K> checks whether an affirmative answer for the Prime Graph Question for
+the given group can be obtained using the HeLP method, the Wagner restrictions and the data available.
+The argument of the function can be either an ordinary character table
+or a group. In the second case it will first calculate the corresponding
+ordinary character table.
+If the group in question is solvable, the Prime Graph Question has an affirmative answer by a result of W. Kimmerle and the
+function will return <K>true</K> without performing any calculations.<P/>
+If the group is non-solvable, the ordinary character table and all <Math>p</Math>-Brauer
+tables for primes <Math>p</Math> for which the group is not <Math>p</Math>-solvable and which are available in GAP will be used to produce as many
+constraints on the torsion units as possible. Additionally, the Wagner test
+is applied to the results, cf. Section <Ref Sect='Chapter_Background_Section_The_Wagner_test'/>.
+In case the information
+suffices to obtain an affirmative answer for the Prime Graph Question,
+the function will return <K>true</K> and it will return <K>false</K> otherwise.
+Let <Math>p</Math> and <Math>q</Math> be distinct primes such that there are elements of order <Math>p</Math> and <Math>q</Math> in <Math>G</Math> but no elements of order <Math>pq</Math>.
+Then for <Math>k</Math> being <Math>p</Math>, <Math>q</Math> or <Math>pq</Math> the function will save the possible partial augmentations for elements of order <Math>k</Math>
+and its (non-trivial) powers in <K>HeLP_sol[k]</K>. The function also does not use the previously computed partial augmentations
+for elements of these orders but will overwrite the content of <K>HeLP_sol</K>.
+If you do not like the last fact, please use <Ref Func='HeLP_AllOrdersPQ'/>.
+ </Description>
+</ManSection>
+
+
+
+</Section>
+
+
+</Chapter>
+

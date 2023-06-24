@@ -1,0 +1,73 @@
+<!-- 
+groups_app.xml    FinInG package documentation
+                                                                   John Bamberg
+                                                                   Anton Betten
+                                                                  Philippe Cara
+                                                                   Jan De Beule
+                                                                 Michel Lavrauw
+                                                                Max Neunhoeffer
+
+  Copyright (C) 2018,	Colorado State University
+                        Sabancı Üniversitesi
+						Università degli Studi di Padova
+						Universiteit Gent
+						University of St. Andrews
+						University of Western Australia
+                        Vrije Universiteit Brussel
+ 
+This appendix gives more (technical) information on structure of FinInG.
+-->
+
+<Appendix Label="groups_app">
+<Heading>The structure of <Package>FinInG</Package> </Heading>
+<Section>
+<Heading>The different components</Heading>
+
+<Package>FinInG</Package> consists of the following components: geometry,
+liegeometry, group, projectivespace, correlations, polarspace/morphisms,
+enumerators, diagram, varieties, affinespace/affinegroup, gpolygons, and orbits-stabilisers.
+Each of these components corresponds with a <E>component.gd</E> and <E>component.gi</E> file.
+The file <E>component.gi</E> will be dependent on <E>component.gd</E> and all
+previously loaded <E>.gd</E> files, <E>component1/component2</E> means
+that both <E>component1.gi</E> and <E>component2.gi</E> depend on the declarations
+in both <E>component1.gd</E> and <E>component2.gd</E>.
+
+</Section>
+<Section>
+<Heading>The complete inventory</Heading>
+
+<Subsection>
+<Heading>Declarations</Heading>
+<Example>
+<#Include SYSTEM "./include/operations_inventory.txt">
+</Example>
+<Example>
+<#Include SYSTEM "./include/attributes_inventory.txt">
+</Example>
+<Example>
+<#Include SYSTEM "./include/properties_inventory.txt">
+</Example>
+</Subsection>
+
+<Subsection>
+<Heading>Functions/Methods</Heading>
+<Example>
+<#Include SYSTEM "./include/functions_inventory.txt">
+</Example>
+<Example>
+<#Include SYSTEM "./include/methods_inventory.txt">
+</Example>
+
+</Subsection>
+
+</Section>
+<!-- 
+<Section>
+<Heading>The filter graph(s)</Heading>
+
+<Alt Only="HTML">&lt;img src="./graphics/filtergraph.png">&lt;/img></Alt>
+<Alt Only="LaTeX">\includegraphics[width=18cm]{./graphics/filtergraph.png}</Alt><P/>
+
+</Section>
+ -->
+</Appendix>
