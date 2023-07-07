@@ -1,0 +1,1 @@
+ -lgmp -lz -lreadline    -lm -ldl -lutil 
